@@ -4,7 +4,7 @@ class Song < ActiveRecord::Base
   has_many :notes
 
 #we are building the custom setter method that allows songs to have many notes
-#take each id and find that note object and push into the song.notes collection
+#take each note(from the form) and build that note while associating it with the song.
   def note_contents=(notes)
     notes.each do |content|
       self.notes.build(content: content) if !content.empty?
@@ -21,7 +21,7 @@ class Song < ActiveRecord::Base
 
 #we have a custom setter to assign an artist object to the song. It finds the artist object by name.
   def artist_name=(name)
-    self.artist = Artist.find_or_create_by(name: name)
+    artist = Artist.find_or_create_by(name: name)
     self.artist = artist
   end
 
@@ -34,7 +34,7 @@ class Song < ActiveRecord::Base
 
 #we have a custom setter to assign an artist object to the song. It finds the artist object by name.
   def genre_name=(name)
-    self.genre = Genre.find_or_create_by(name: name)
+    genre = Genre.find_or_create_by(name: name)
     self.genre = genre
   end
 
